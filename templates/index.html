@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Song Recommendation</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        select { width: 300px; padding: 5px; }
+        button { margin-left: 10px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+    <h1>Song Recommendation System</h1>
+
+    <form method="POST">
+        <label for="song">Choose a song:</label><br><br>
+        <select name="song" id="song">
+            {% for song in songs %}
+                <option value="{{ song }}" {% if selected_song == song %}selected{% endif %}>
+                    {{ song }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+        <h2>Recommendations for "{{ selected_song }}"</h2>
+        <ul>
+            {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
